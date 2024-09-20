@@ -1,17 +1,5 @@
 ﻿@inject IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase;
 
-<ul>
-    @if (inventories is not null && inventories.Count > 0)
-    {
-        foreach (var inv in inventories)
-        {
-            <li>
-                @inv.Name
-            </li>
-        }
-    }
-</ul>
-
 <table class="table">
     <thead>
         <tr>
@@ -26,18 +14,7 @@
         {
             foreach (var inv in inventories)
             {
-                <tr>
-                    <td>@inv.Name</td>
-                    <td>@inv.Quantity</td>
-                    <td>@inv.Price.ToString("c")</td>
-                    <td>
-                        <button 
-                            type="button"
-                            class="btn btn-light">
-                            Edit
-                        </button>
-                    </td>
-                </tr>
+                <InventoryListItemComponent Inventory="inv" />
             }
         }
     </tbody>
