@@ -39,6 +39,18 @@ public class InventoryRepository : IInventoryRepository
 
     public Task UpdateInventoryAsync(Inventory inventory)
     {
-        throw new NotImplementedException();
+        if (_inventories.Any(i => i.Id != inventory.Id
+            && i.Name.Equals(inventory.Name, StringComparison.OrdinalIgnoreCase)))
+            return Task.CompletedTask;
+
+        var invToUpdate = _inventories.FirstOrDefault(i => i.Id == inventory.Id);
+        if (invToUpdate is not null)
+        {
+            inventory.Name = invToUpdate.Name;
+            inventory.Quantity = invToUpdate.Quantity;
+            inventory.Price = invToUpdate.Price;
+        }
+
+        return Task.CompletedTask;
     }
 }
