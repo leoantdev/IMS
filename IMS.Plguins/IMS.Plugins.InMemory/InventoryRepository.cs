@@ -36,4 +36,9 @@ public class InventoryRepository : IInventoryRepository
 
         return _inventories.Where(i => i.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
     }
+
+    public Task UpdateInventoryAsync(Inventory inventory)
+    {
+        throw new NotImplementedException();
+    }
 }
