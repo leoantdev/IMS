@@ -18,6 +18,18 @@ public class InventoryRepository : IInventoryRepository
         };
     }
 
+    public Task AddInventoryAsync(Inventory inventory)
+    {
+        if (_inventories.Any(i => i.Name.Equals(i.Name, StringComparison.OrdinalIgnoreCase))) return Task.CompletedTask;
+
+        _inventories.Add(inventory);
+
+        var maxId = _inventories.Max(i => i.Id);
+        inventory.Id = maxId + 1;
+
+        return Task.CompletedTask;
+    }
+
     public async Task<IEnumerable<Inventory>> GetInventoriesByNameAsync(string name)
     {
         if (string.IsNullOrWhiteSpace(name)) return await Task.FromResult(_inventories);
