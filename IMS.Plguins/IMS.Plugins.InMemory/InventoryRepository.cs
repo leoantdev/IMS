@@ -53,4 +53,9 @@ public class InventoryRepository : IInventoryRepository
 
         return Task.CompletedTask;
     }
+
+    public async Task<Inventory> ViewInventoryByIdAsync(int inventoryId)
+    {
+        return await Task.FromResult(_inventories.First(i => i.Id == inventoryId));
+    }
 }
