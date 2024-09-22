@@ -46,9 +46,9 @@ public class InventoryRepository : IInventoryRepository
         var invToUpdate = _inventories.FirstOrDefault(i => i.Id == inventory.Id);
         if (invToUpdate is not null)
         {
-            inventory.Name = invToUpdate.Name;
-            inventory.Quantity = invToUpdate.Quantity;
-            inventory.Price = invToUpdate.Price;
+            invToUpdate.Name = inventory.Name;
+            invToUpdate.Quantity = inventory.Quantity;
+            invToUpdate.Price = inventory.Price;
         }
 
         return Task.CompletedTask;

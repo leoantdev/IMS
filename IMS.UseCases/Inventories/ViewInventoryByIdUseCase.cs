@@ -1,4 +1,5 @@
-﻿using IMS.UseCases.Inventories.Interfaces;
+﻿using IMS.CoreBusiness;
+using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginInterfaces;
 
 namespace IMS.UseCases.Inventories;
@@ -11,8 +12,8 @@ public class ViewInventoryByIdUseCase : IViewInventoryByIdUseCase
         _inventoryRepository = inventoryRepository;
     }
 
-    public async Task ExecuteAsync(int inventoryId)
+    public async Task<Inventory> ExecuteAsync(int inventoryId)
     {
-        await _inventoryRepository.ViewInventoryByIdAsync(inventoryId);
+        return await _inventoryRepository.ViewInventoryByIdAsync(inventoryId);
     }
 }
