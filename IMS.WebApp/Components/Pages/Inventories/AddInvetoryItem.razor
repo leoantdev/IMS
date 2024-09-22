@@ -1,7 +1,48 @@
 ﻿@page "/addInventory"
+@using IMS.UseCases.Inventories
+
+@inject IAddInventoryUseCase AddInventoryUseCase;
 
 <h3>Add Invetory Item</h3>
+<br />
+
+<EditForm Model="inventory" FormName="formInventory" OnValidSubmit="Save">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="name">Inventory Name</label>
+        <InputText id="name"
+                   @bind-Value="inventory.Name"
+                   class="form-control" />
+        <ValidationMessage For="() => inventory.Name" />
+    </div>
+
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <InputNumber id="quantity"
+                     @bind-Value="inventory.Quantity"
+                     class="form-control" />
+        <ValidationMessage For="() => inventory.Quantity" />
+    </div>
+
+    <div class="form-group">
+        <label for="quantity">Price</label>
+        <InputNumber id="price"
+                     @bind-Value="inventory.Price"
+                     class="form-control" />
+        <ValidationMessage For="() => inventory.Price" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>
 
 @code {
+    [SupplyParameterFromForm]
+    private Inventory inventory { get; set; } = new();
 
+    private async Task Save()
+    {
+        await AddInventoryUseCase.ExecuteAsync(inventory);
+    }
 }
